@@ -1,0 +1,156 @@
+package com.cg.emp;
+
+import java.util.List;
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.cg.emp.persistance.HibernateUtil;
+ 
+
+ 
+public class UseEmployee {
+	 
+	public static  void insertEmployee(Employee newEmployee) {
+ 
+		  Transaction transaction = null;
+	        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	            // start a transaction
+	            transaction = session.beginTransaction();
+	            session.save(newEmployee);
+	            transaction.commit();
+	        } catch (Exception e) {
+	            if (transaction != null) {
+	                transaction.rollback();
+	            }
+	            e.printStackTrace();
+	        }
+	}
+
+	public void getEmployeeById(int id) {
+		Transaction transaction=null;
+		 try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	            // start a transaction
+			 transaction = session.beginTransaction();
+			 Employee e1=session.get(Employee.class,id);
+			 System.out.println(e1);
+			 //System.out.println((session.get(Employee.class, id).toString()));
+	            transaction.commit();
+	        } catch (Exception e) {
+	            if (transaction != null) {
+	                transaction.rollback();
+	            }
+	            e.printStackTrace();
+	        }
+	}
+
+	public  void ListAllEmployee() {
+		 try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	            // Query to get all employees (assuming Employee is mapped correctly)
+	            String hql = "FROM Employee";
+	            List<Employee> employees = session.createQuery(hql, Employee.class).list();
+	            // Print each employee's details
+	            if (employees.isEmpty()) {
+	                System.out.println("No employees found.");
+	            } else {
+	                for (Employee employee : employees) {
+	                    System.out.println("ID: " + employee.getId() + ", Name: " + employee.getFirstName() + " " + employee.getLastName() + ", Salary: " + employee.getSalary());
+	                }
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+
+
+	 public void deleteEmployee(int id) {
+	        Transaction transaction = null;
+	        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	            // Start a transaction
+	            transaction = session.beginTransaction();
+	            // Get the employee by ID
+	            Employee e1 = session.get(Employee.class, id);
+	            if (e1 != null) {
+	                // Delete the employee from the database
+	                session.delete(e1);
+	                System.out.println("Employee with ID " + id + " deleted successfully.");
+	            } else {
+	                System.out.println("No employee found with ID: " + id);
+	            }
+	            // Commit the transaction
+	            transaction.commit();
+	        } catch (Exception e) {
+	            if (transaction != null) {
+	                transaction.rollback(); // Rollback if any exception occurs
+	            }
+	            e.printStackTrace(); // Print the exception for debugging purposes
+	        }
+	    }
+
+
+ 
+    
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 UseEmployee useEmployee = new UseEmployee();
+	        // Create a Scanner object for reading user input
+	        Scanner scanner = new Scanner(System.in);
+		while(true) {
+			    System.out.println("----- Employee Management System -----");
+		        System.out.println("1. Insert a new Employee");
+		        System.out.println("2. View Employee By ID ");
+		        System.out.println("3. List All Employees");
+		        System.out.println("4. Delete Employee data ");
+		        System.out.println("5. Exit");
+		        System.out.print("Enter your choice: ");
+		        int choice=scanner.nextInt();
+		        scanner.nextLine();
+		        switch (choice) {
+                case 1:
+                    // Insert a new employee
+                   // Employee newEmployee = new Employee("Ashwini", "Kekan",340000);
+                	System.out.println("Enter First Name: ");
+                    String firstName = scanner.nextLine();
+                    System.out.println("Enter Last Name: ");
+                    String lastName = scanner.nextLine();
+                    System.out.println("Enter Salary: ");
+                    int salary = scanner.nextInt();
+                    scanner.nextLine();  // Consume the newline character
+                    // Create an Employee object and insert into the database
+                    Employee emp = new Employee(firstName, lastName, salary);
+                    insertEmployee(emp);
+
+                    break;
+                case 2:
+                    // View employee by id
+                	System.out.println("Enter Employee Id: ");
+                	int id= scanner.nextInt();
+                    useEmployee.getEmployeeById(id);
+                    break;
+
+                case 3: System.out.println("All Eployee Details : ");
+                	     useEmployee.ListAllEmployee();
+                      break;
+                case 4:                  
+                	System.out.println("Enter Employee Id to delete: ");
+                int deleteId = scanner.nextInt();
+                useEmployee.deleteEmployee(deleteId);
+ 
+                	   break;
+
+                case 5:
+                    // Exit the program
+                    System.out.println("Exiting program. Goodbye!");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+		        }  
+		}
+
+	}
+ 
+}

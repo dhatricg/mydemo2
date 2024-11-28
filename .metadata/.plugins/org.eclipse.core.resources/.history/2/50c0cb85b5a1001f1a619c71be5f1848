@@ -1,0 +1,40 @@
+package com.cg.emp;
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+
+ 
+public class UseEmployee {
+	public static void main(String [] args) {
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("JpaUnit");
+    	EntityManager em=emf.createEntityManager();
+    	EmployeeDAO dao=new EmployeeDAO(em);
+    	Employee emp1= new Employee("priti","bhalerao",76892);
+    	Employee emp2= new Employee("rajat","bhalerao",96892);
+    	Employee emp3= new Employee("usha","bhalerao",86892);
+    	Employee emp4= new Employee("gokul","bhalerao",186892);
+    	dao.createEmployee(emp1);
+    	dao.createEmployee(emp2);
+    	dao.createEmployee(emp3);
+    	dao.createEmployee(emp4);
+    	//finding by id
+    	dao.findEmployee(1);
+    	//updating
+    	Employee e= new Employee(1,"bunny","bhalerao",76892);
+    	dao.updateEmployee(e);
+    	//deleting 
+    	dao.deleteEmployee(1);
+		
+
+		
+	
+		
+	
+	}
+}

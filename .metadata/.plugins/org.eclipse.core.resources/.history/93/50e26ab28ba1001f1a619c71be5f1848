@@ -1,0 +1,25 @@
+package com.cg.emp;
+
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+
+ 
+public class UseEmployee {
+	public static void main(String [] args) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaUnit");
+		EntityManager em  = emf.createEntityManager();
+		
+		EmployeeDAO dao = new EmployeeDAO(em);
+		
+		Employee emp1 = new Employee("Dhatri", "sahu", 30000);
+		
+		dao.createEmployee(emp1);
+		dao.updateEmployee(emp1);
+		dao.findEmployee(1);
+		
+	
+	}
+}

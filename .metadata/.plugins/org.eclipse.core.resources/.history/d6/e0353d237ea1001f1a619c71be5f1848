@@ -1,0 +1,12 @@
+package com.cg.emp;
+
+
+import javax.persistence.Persistence;
+
+
+ 
+public class UseEmployee {
+	public static void main(String [] args) {
+		EmtityManagerFactory emf = Persistence.createEntityManagerFactory("JpaUnit");
+	}
+}

@@ -1,0 +1,129 @@
+package com.cg.dhatri;
+
+interface Bank {
+    void assignLoans(int[] loans);
+    void averageLoan();
+    void maxLoan();
+    void minLoan();
+}
+
+class PersonalLoanDept implements Bank {
+    private int[] loanAmounts;
+
+    public PersonalLoanDept(int clients) {
+        this.loanAmounts = new int[clients];
+    }
+
+    @Override
+    public void assignLoans(int[] loans) {
+        int length = Math.min(loanAmounts.length, loans.length);
+        for (int i = 0; i < length; i++) {
+            loanAmounts[i] = loans[i];
+        }
+        System.out.println("Loans for clients processed");
+    }
+
+    @Override
+    public void averageLoan() {
+        double sum = 0;
+        for (int amount : loanAmounts) {
+            sum += amount;
+        }
+        double average = sum / loanAmounts.length;
+        System.out.printf("Average loan amount for clients is %.2f%n", average);
+    }
+
+    @Override
+    public void maxLoan() {
+        int max = 0;
+        for (int amount : loanAmounts) {
+            max = Math.max(max, amount);
+        }
+        System.out.printf("Maximum loan amount amongst clients is %d%n", max);
+    }
+
+    @Override
+    public void minLoan() {
+        int min = Integer.MAX_VALUE;
+        for (int amount : loanAmounts) {
+            min = Math.min(min, amount);
+        }
+        System.out.printf("Minimum loan amount amongst clients is %d%n", min);
+    }
+}
+
+class BusinessLoanDept implements Bank {
+    private int[] loanAmounts;
+
+    public BusinessLoanDept(int businesses) {
+        this.loanAmounts = new int[businesses];
+    }
+
+    @Override
+    public void assignLoans(int[] loans) {
+        int length = Math.min(loanAmounts.length, loans.length);
+        for (int i = 0; i < length; i++) {
+            loanAmounts[i] = loans[i];
+        }
+        System.out.println("Loans for businesses processed");
+    }
+
+    @Override
+    public void averageLoan() {
+        double sum = 0;
+        for (int amount : loanAmounts) {
+            sum += amount;
+        }
+        double average = sum / loanAmounts.length;
+        System.out.printf("Average loan amount for businesses is %.2f%n", average);
+    }
+
+    @Override
+    public void maxLoan() {
+        int max = 0;
+        for (int amount : loanAmounts) {
+            max = Math.max(max, amount);
+        }
+        System.out.printf("Maximum loan amongst businesses is %d%n", max);
+    }
+
+    @Override
+    public void minLoan() {
+        int min = Integer.MAX_VALUE;
+        for (int amount : loanAmounts) {
+            min = Math.min(min, amount);
+        }
+        System.out.printf("Minimum loan amongst businesses is %d%n", min);
+    }
+}
+
+public class Solution {
+    public static void main(String args[]) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        String[] count = sc.nextLine().split(" ");
+        PersonalLoanDept p = new PersonalLoanDept(Integer.parseInt(count[0]));
+        BusinessLoanDept b = new BusinessLoanDept(Integer.parseInt(count[1]));
+
+        count = sc.nextLine().split(" ");
+        int[] loansClients = new int[count.length];
+        for (int i = 0; i < count.length; i++) {
+            loansClients[i] = Integer.parseInt(count[i]);
+        }
+        p.assignLoans(loansClients);
+
+        count = sc.nextLine().split(" ");
+        int[] loansBusinesses = new int[count.length];
+        for (int i = 0; i < count.length; i++) {
+            loansBusinesses[i] = Integer.parseInt(count[i]);
+        }
+        b.assignLoans(loansBusinesses);
+
+        p.averageLoan();
+        p.maxLoan();
+        p.minLoan();
+
+        b.averageLoan();
+        b.maxLoan();
+        b.minLoan();
+    }
+}

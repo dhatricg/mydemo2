@@ -1,0 +1,21 @@
+package com.cg.emp;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.cg.emp.persistance.HibernateUtil;
+
+public class UseEmployee {
+
+	public static void main(String[] args) {
+		Employee e1 = new Employee(1, "dhatri", "sahu", 300000);
+		Transaction transaction = null;
+		Session session  = HibernateUtil.getSessionFactory().openSession();
+		session.save(e1);
+		transaction.commit();
+		
+	 
+
+	}
+
+}

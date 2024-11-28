@@ -1,0 +1,37 @@
+package com.cg.emp;
+
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+import com.cg.emp.persistance.HibernateUtil;
+
+public class UseEmployeeHql {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        String str="from Employee";
+	      Query query =  session.createQuery(str,Employee.class);
+	      List<Employee> emplist=query.list();
+	      Iterator<Employee> it=emplist.iterator();
+	      while(it.hasNext()) {
+	    	  System.out.println(it.next());
+	      }
+	      //get employee by id
+	      int eId=6;
+	      int esal=999999;
+	      str="from Employee where id = :eId and salary= :esal";
+
+	      Query<Employee> query1=session.createQuery(str,Employee.class); 
+	      query1.setParameter("eId",eId); 
+	      query1.setParameter("esal", esal);
+	     Employee e1= query1.uniqueResult();
+	     System.out.println(e1);
+
+ 
+	}
+
+}

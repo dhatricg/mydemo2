@@ -1,0 +1,92 @@
+package com.cg.emp;
+
+import java.util.List;
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.cg.emp.persistance.HibernateUtil;
+ 
+
+ 
+public class UseEmployee {
+    public static void insertEmp(Employee e) {
+    	
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Start a transaction
+            transaction = session.beginTransaction();
+            // Save the employee object
+            session.save(e);
+            // Commit the transaction
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void listAll() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Retrieve all employees
+            List<Employee> employees = session.createQuery("FROM Employee", Employee.class).list();
+            // Check if employees are found
+            if (!employees.isEmpty()) {
+                System.out.println("List of Employees:");
+                for (Employee emp : employees) {
+                    System.out.println("ID: " + emp.getId());
+                    System.out.println("First Name: " + emp.getFirstName());
+                    System.out.println("Last Name: " + emp.getLastName());
+                    System.out.println("Salary: " + emp.getSalary());
+                    System.out.println("-------------------------------");
+                }
+            } else {
+                System.out.println("No employees found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void getEmployeeById(int id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Retrieve the employee by ID
+            Employee emp = session.get(Employee.class, id);
+            if (emp != null) {
+                System.out.println("Employee found:");
+                System.out.println("ID: " + emp.getId());
+                System.out.println("First Name: " + emp.getFirstName());
+                System.out.println("Last Name: " + emp.getLastName());
+                System.out.println("Salary: " + emp.getSalary());
+            } else {
+                System.out.println("No employee found with ID: " + id);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+ 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+            System.out.println("Enter first name: ");
+            String name = sc.nextLine();
+            System.out.println("Enter last name: ");
+            String lname = sc.nextLine();
+            System.out.println("Enter salary: ");
+            Integer salary = sc.nextInt();
+            Employee empObj1 = new Employee(salary, name, lname, salary);
+            insertEmp(empObj1);
+            listAll();
+            System.out.print("Enter Employee ID to fetch: ");
+            int employeeId = sc.nextInt();
+            getEmployeeById(employeeId);
+
+            sc.close(); // Close the scanner
+        }
+}

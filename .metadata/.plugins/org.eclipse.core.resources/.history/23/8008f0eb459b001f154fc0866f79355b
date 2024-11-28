@@ -1,0 +1,29 @@
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+ 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import com.cg.BankAcount;
+ 
+ 
+public class BankAccountTest {
+	BankAcount acc ;
+	@BeforeEach
+    public void initBankAccount() {
+        acc = new BankAcount ();
+        System.out.println(" Hello ! Before All Tests");
+    }
+	public void testDeposit() {
+		acc.deposit(100);
+		assertEquals(100, acc.getBalance(), "balance should be 100");
+	}
+	
+	@Test
+	public void testInitialBalnace() {
+			assertEquals(0.0, acc.getBalance());
+		
+	}
+	
+	
+}

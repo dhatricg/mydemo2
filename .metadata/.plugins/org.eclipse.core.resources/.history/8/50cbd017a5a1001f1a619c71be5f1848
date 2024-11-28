@@ -1,0 +1,51 @@
+package com.cg.emp;
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
+
+ 
+public class UseEmployee {
+	public static void main(String [] args) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaUnit");
+		EntityManager em  = emf.createEntityManager();
+//		Employee emp1 = new Employee("Dhatri", "Sahu", 60000);
+//		Department d1 = new Department("HR");
+		
+		
+		Department d1 = new Department("Sales");
+		Set<Employee> employees = new HashSet<>();
+		Employee e1 = new Employee("Priti", "Bholorae", 20000);
+	    Employee e2 = new Employee("Vista", "Sahu", 40000);
+	    
+	    e1.setDepartment(d1);
+	    
+	    
+	    
+	    
+	    
+		
+		
+		
+//		EmployeeDAO dao1 = new EmployeeDAO(em);
+//		Department dao2  =new Department(em);
+//		EmployeeDAO dao = new EmployeeDAO(em);
+//		
+//		Employee emp1 = new Employee("Dhatri", "sahu", 30000);
+//		
+//		dao.createEmployee(emp1);
+//		dao.updateEmployee(emp1);
+//		dao.findEmployee(1);
+//		dao.deleteEmployee(1);
+//		
+
+		
+	
+		
+	
+	}
+}

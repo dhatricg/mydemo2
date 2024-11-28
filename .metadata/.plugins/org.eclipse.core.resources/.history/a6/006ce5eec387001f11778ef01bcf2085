@@ -1,0 +1,27 @@
+package com.cg.Comparator;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class UseEmployee {
+
+	public static void main(String[] args) {
+		ArrayList<Employee> emparr=new ArrayList<Employee>();
+		Employee emp1 = new Employee(100,"dharti");
+		Employee emp2 = new Employee(200,"priti");
+		Employee emp3 = new Employee(300,"mansi");
+		emparr.add(emp1);
+		emparr.add(emp2);
+		emparr.add(emp3);
+		
+		Collections.sort(emparr, new SalaryComparator());
+		for(Employee e:emparr) {
+			System.out.println(e);
+		}
+		
+		
+		// TODO Auto-generated method stub
+
+	}
+
+}

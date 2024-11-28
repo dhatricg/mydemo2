@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;com.ds.trees.useTrees.java&apos; to &apos;Node.java&apos;&#x0D;&#x0A;- Original project: &apos;DataStructures&apos;&#x0D;&#x0A;- Original element: &apos;com.ds.trees.useTrees.java&apos;&#x0D;&#x0A;- Renamed element: &apos;com.ds.trees.Node.java&apos;" description="Rename compilation unit &apos;useTrees.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;com.ds.trees{useTrees.java" name="Node.java" references="false" stamp="1729502195137" version="1.0"/>
+</session>

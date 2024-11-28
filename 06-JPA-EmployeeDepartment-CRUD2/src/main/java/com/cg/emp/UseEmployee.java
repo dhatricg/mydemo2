@@ -1,0 +1,49 @@
+package com.cg.emp;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+ 
+public class UseEmployee {
+	public static void main(String [] args) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaUnit");
+		EntityManager em  = emf.createEntityManager();
+		
+//		EmployeeDAO dao = new EmployeeDAO(em);
+//		
+//		Employee emp1 = new Employee("Dhatri", "sahu", 30000);
+//		
+//		dao.createEmployee(emp1);
+//		dao.updateEmployee(emp1);
+//		dao.findEmployee(1);
+//		dao.deleteEmployee(1);
+		
+		
+//		Employee emp1 = new Employee("Dhatri", "Sahu", 60000);
+//		Department d1 = new Department("HR");
+		
+	
+    	/*EmployeeDAO dao=new EmployeeDAO(em);
+    	Employee emp= new Employee("priti","bhalerao",76892);*/
+		
+    	 Department d1= new Department("Sales");
+    	 Set<Employee> employees= new HashSet<>();
+    	 Employee e1= new Employee("priti","bhalerao",76892);
+    	 Employee e2= new Employee("dhatri","sahu",96892);
+    	 e1.setDepartment(d1);
+    	 e2.setDepartment(d1);
+    	 employees.add(e1);
+    	 employees.add(e1);
+    	 DepartmentDAO deptdao= new DepartmentDAO(em);
+    	 deptdao.createDepartmentWithEmployee(d1, employees);
+    	 deptdao.UpdateDepartment(1, d1);
+    	 deptdao.findDepartment(1);
+	
+		
+	
+	}
+}

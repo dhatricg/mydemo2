@@ -1,0 +1,10 @@
+package com.cg.emp;
+
+import java.util.Set;
+
+public class DepartmentDAO {
+	public void createDepartmentWithEmployee(Department department, Set<Employee> employees) {
+		
+	}
+
+}

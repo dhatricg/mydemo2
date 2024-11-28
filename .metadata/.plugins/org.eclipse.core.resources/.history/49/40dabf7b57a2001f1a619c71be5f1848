@@ -1,0 +1,52 @@
+package com.cg.client;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+
+import com.cg.entity.Person;
+
+public class SaveClientData {
+	EntityManager em;
+	
+	public SaveClientData(EntityManager em) {
+		super();
+		this.em = em;
+	}
+
+	public void createEmployee(Person emp) {
+		EntityTransaction transaction = em.getTransaction();
+		try {
+			
+		transaction.begin();
+		em.persist(emp);
+		transaction.commit();
+		System.out.println("Employee has been created with this id");
+		}
+		catch(RuntimeException e) {
+			if(transaction.isActive()) {
+				transaction.rollback();
+			}
+			else {
+				throw e;
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaUnit");
+		EntityManager em  = emf.createEntityManager();
+
+		SaveClientData  data = new SaveClientData(em);
+		
+		Person person = new Person("Dhatri", "Female");
+		
+		data.createEmployee(person);
+		
+		
+
+	}
+
+}

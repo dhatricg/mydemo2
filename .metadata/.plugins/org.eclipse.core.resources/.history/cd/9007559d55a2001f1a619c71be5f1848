@@ -1,0 +1,12 @@
+package com.cg.client;
+
+import javax.persistence.EntityManager;
+
+public class SaveClientData {
+
+	public static void main(String[] args) {
+		EntityManager em = new EntityManager
+
+	}
+
+}

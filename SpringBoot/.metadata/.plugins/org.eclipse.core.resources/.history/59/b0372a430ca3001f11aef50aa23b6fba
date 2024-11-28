@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
+  
+<bean id="empbean" class="com.cg.Order">
+    <constructor-arg value="01" type="int"></constructor-arg>  
+	<constructor-arg value="10/11/2024" type="String"></constructor-arg>  
+	<constructor-arg value="Alex"></constructor-arg>
+</bean>  
+
+<bean id="empbean1" class="com.code.Order"> 
+    <property name="id">  <value>01</value>  </property>  
+	<property name="orderDate">  <value>20/11/2024</value>  </property>  
+	<property name="CustomerName">  <value>Alisa</value>  </property>  
+</bean>   
+ 
+  
+</beans>

@@ -1,0 +1,12 @@
+package com.cg;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+	@Bean(name = "empBean")
+	public class empBean() {
+		return new Order(1, "15/11/2024", Alex);
+	}
+
+}
